@@ -46,7 +46,7 @@ You probably shouldn't publish the library as v0 unless you specifically want to
 Now let's take a look at the semantic lord of confusion, the dreaded major version 2. If you simply try to publish the tag v2.0.0 and then fetch it, you will get this infamous error.
 
 ```sh
-go: gitlab.com/mintc2/lib@v2.0.0: invalid version: go.mod has post-v2 module path "gitlab.com/mintc2/lib/v2" at revision v2.0.0
+go: github.com/mintc2/lib@v2.0.0: invalid version: go.mod has post-v2 module path "github.com/mintc2/lib/v2" at revision v2.0.0
 ```
 
 That's because any module with major version v2.X.X or more has to append the suffix `/v{major_version}` to the module name in the go.mod file and when importing it.
@@ -92,8 +92,8 @@ Suppose you have the latest tag at v1.5.2, but you've made a breaking change and
 2. Add a deprecation message in go.mod. "Deprecated:" is case-sensitive.
 
 ```go title='go.mod'
-// Deprecated: gitlab.com/mintc2/lib/v2 instead.
-package gitlab.com/mintc2/lib
+// Deprecated: github.com/mintc2/lib/v2 instead.
+package github.com/mintc2/lib
 ```
 
 3. Commit and push the changes.
@@ -113,7 +113,7 @@ So, say you just published version v1.5.0 and it should be retracted. Here's how
 1. Add the retract directive to the go.mod.
 
 ```go title='go.mod'
-package gitlab.com/mintc2/lib
+package github.com/mintc2/lib
 
 retract(
     v1.5.0 // Published prematurely.
